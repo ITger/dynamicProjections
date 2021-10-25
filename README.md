@@ -11,5 +11,3 @@ public interface StudentDynamicRepository extends CrudRepository<Student, Long> 
     <T> T findStudentById(Long id, Class<T> type);
 }
 ```
-
-
