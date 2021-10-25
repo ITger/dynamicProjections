@@ -19,7 +19,7 @@ public class Application {
 
 
     /**
-     * In this bean, we fill a database with some sample data, and then query the DB using standard crud repository
+     * Here we fill a database with some sample data, and then query the DB using standard crud repository
      * and dynamic projections, this way we can retrieve an object of the desired type reducing the size of the query.
      */
     @Bean
@@ -45,7 +45,7 @@ public class Application {
             /*
               Using dynamic projection we can select from DB a limited number of columns.
 
-               Extracting only student last name and email address:
+               Extracting only student last name and email address fields:
               Hibernate will execute the following query:
               select student0_.last_name as col_0_0_, student0_.email_address as col_1_0_
               from student student0_
@@ -55,7 +55,7 @@ public class Application {
             System.out.println(studentLnEmailView.getLastName() + " " + studentLnEmailView.getEmailAddress());
 
             /*
-              extracting only student age
+              extracting only student age field
               Hibernate will execute the following query:
               select student0_.age as col_0_0_
               from student student0_
