@@ -29,43 +29,43 @@ public class Application {
             System.out.println("Count: " + studentRepository.count());
 
             Iterable<Student> all = studentRepository.findAll();
-            all.forEach(student -> System.out.println(student));
+            all.forEach(System.out::println);
 
-            /**
-             * Standard way.
-             * in this case Hibernate will execute the following query:
-             * select student0_.id as id1_0_0_, student0_.age as age2_0_0_, student0_.email_address as email_ad3_0_0_, student0_.first_name as first_na4_0_0_, student0_.gender as gender5_0_0_, student0_.last_name as last_nam6_0_0_
-             * from student student0_
-             * where student0_.id=?
+            /*
+              Standard way.
+              in this case Hibernate will execute the following query:
+              select student0_.id as id1_0_0_, student0_.age as age2_0_0_, student0_.email_address as email_ad3_0_0_, student0_.first_name as first_na4_0_0_, student0_.gender as gender5_0_0_, student0_.last_name as last_nam6_0_0_
+              from student student0_
+              where student0_.id=?
              */
             Optional<Student> student = studentRepository.findById(1L);
-            student.ifPresent(s -> System.out.println(s));
+            student.ifPresent(System.out::println);
 
 
-            /**
-             * Using dynamic projection we can select from DB a limited number of columns.
-             *
-             *  Extracting only student last name and email address:
-             * Hibernate will execute the following query:
-             * select student0_.last_name as col_0_0_, student0_.email_address as col_1_0_
-             * from student student0_
-             * where student0_.id=?
-             * */
+            /*
+              Using dynamic projection we can select from DB a limited number of columns.
+
+               Extracting only student last name and email address:
+              Hibernate will execute the following query:
+              select student0_.last_name as col_0_0_, student0_.email_address as col_1_0_
+              from student student0_
+              where student0_.id=?
+              */
             StudentLnEmailView studentLnEmailView = studentDynamicRepository.findStudentById(1L, StudentLnEmailView.class);
             System.out.println(studentLnEmailView.getLastName() + " " + studentLnEmailView.getEmailAddress());
 
-            /**
-             * extracting only student age
-             * Hibernate will execute the following query:
-             * select student0_.age as col_0_0_
-             * from student student0_
-             * where student0_.id=?
-             * */
+            /*
+              extracting only student age
+              Hibernate will execute the following query:
+              select student0_.age as col_0_0_
+              from student student0_
+              where student0_.id=?
+              */
             StudentAgeView studentAgeView = studentDynamicRepository.findStudentById(1L, StudentAgeView.class);
             System.out.println(studentAgeView.getAge());
 
-            /**
-             * in this case, hibernate will select all columns.
+            /*
+              in this case, hibernate will select all columns.
              */
             Student s = studentDynamicRepository.findStudentById(1L, Student.class);
             System.out.println(s.getAge());
