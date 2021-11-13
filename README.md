@@ -11,3 +11,5 @@ public interface StudentDynamicRepository extends CrudRepository<Student, Long> 
     <T> T findStudentById(Long id, Class<T> type);
 }
 ```
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ITger&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
